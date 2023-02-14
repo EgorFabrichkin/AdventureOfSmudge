@@ -1,6 +1,6 @@
+using GameCore.Boosters;
 using GameCore.Player;
 using GameCore.Player.Jumps;
-using GameCore.Spawns;
 using GameCore.Spawns.BoostersSpawns;
 using GameCore.Spawns.PlatformsSpawns;
 using UI;
@@ -23,8 +23,7 @@ public class EntryPoint : MonoBehaviour
         
         jumpCountView.EnsureNotNull("jumpCountView not found")
             .CountView(
-                new JumpCount(player)
-                    .MaxValue
+                new JumpCount(player).MaxValue
             );
     }
 

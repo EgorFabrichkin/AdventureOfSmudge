@@ -10,7 +10,6 @@ namespace GameCore.Player.Jumps
         public JumpCount(Player player)
         {
             player.jumped.AddListener(()=> maxValue.Value--);
-            player.boosted.AddListener(()=> maxValue.Value = 20);
         }
     }
 }

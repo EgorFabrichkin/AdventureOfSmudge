@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GameCore.Boosters;
 using GameCore.Platforms;
 using UnityEngine;
 using Utils;
@@ -10,16 +11,14 @@ namespace GameCore.Spawns.BoostersSpawns
     public class BoostersSpawn : SimpleSpawn
     {
         [SerializeField] private Booster boosterPrefabs = null!;
-        [SerializeField] private int countBooster;
-        [SerializeField] private float lifeTimeBooster;
+        [SerializeField] private int countBooster = 10;
+        [SerializeField] private float lifeTimeBooster = 5f;
         [SerializeField] private int minStep;
         [SerializeField] private int maxStep;
         
         private ObjectPool<Booster> boostersPool = null!;
         private IReadOnlyList<Platform> actualPlatforms = null!;
 
-        private readonly Vector3 distance = new (0, 1, 0);
-        
         private void Awake()
         {
             boostersPool = new ObjectPool<Booster>(
@@ -30,6 +29,7 @@ namespace GameCore.Spawns.BoostersSpawns
 
         private void Update()
         {
+            //Debug:
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 StartCoroutine(Spawn());
@@ -40,6 +40,8 @@ namespace GameCore.Spawns.BoostersSpawns
         {
             var newBooster = boostersPool.TryGetObject();
 
+            var distance = new Vector3(0, 1, 0);
+            
             newBooster.transform.SetPositionAndRotation(
                 actualPlatforms[Random.Range(
                                     minStep, 
@@ -48,6 +50,8 @@ namespace GameCore.Spawns.BoostersSpawns
                 + distance,
                 Quaternion.identity
             );
+            
+            newBooster.collected.AddListener(() => boostersPool.ReturnToPool(newBooster));
             
             yield return new WaitForSeconds(lifeTimeBooster);
             

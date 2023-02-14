@@ -1,5 +1,4 @@
-﻿using GameCore.Colors;
-using GameCore.Platforms;
+﻿using GameCore.Platforms;
 using GameCore.Player.Inputs;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,22 +11,19 @@ namespace GameCore.Player
     public class Player : MonoBehaviour
     {
         public UnityEvent jumped = new();
-        public UnityEvent boosted = new();
 
         [SerializeField] private SpriteRenderer spriteRenderer = null!;
         [SerializeField] private float speed;
+        [SerializeField] private float jumpPower;
         [Header("Dependencies")] 
         [SerializeField] private PlayerInputBehavior playerInput = null!;
         
         private new Rigidbody2D rigidbody2D = null!;
-        private new Collider2D collider2D = null!;
-
+        
         private void Awake()
         {
             playerInput.EnsureNotNull("Input not specified");
-            
             rigidbody2D = GetComponent<Rigidbody2D>()!;
-            collider2D = GetComponent<Collider2D>()!;
             spriteRenderer = GetComponent<SpriteRenderer>()!;
         }
 
@@ -43,24 +39,22 @@ namespace GameCore.Player
                 ChangeSpriteColor();
             }
         }
-        
-        //РАЗДЕЛИТЬ НА 2 СКРИПТА?
 
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (!col.collider.TryGetComponent(out Platform platform)) return;
             if (spriteRenderer.color == platform.SetColor())
             {
-                Crash();
+                //Crash();
             }
             Jump();
         }
 
-        private void Crash() => collider2D.enabled = false;
+        private void Crash() => rigidbody2D.isKinematic = true;
 
         private void Jump()
         {
-            rigidbody2D.isKinematic = true;
+            rigidbody2D.AddForce(Vector2.up * jumpPower);
             jumped.Invoke();
             //ChangeSpriteColor();
         }

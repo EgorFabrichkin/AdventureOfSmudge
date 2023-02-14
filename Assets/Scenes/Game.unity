@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boosterPrefabs: {fileID: 2310197285806044706, guid: 49324c04b541de74daa803504b19ce6e, type: 3}
-  countBooster: 20
-  lifeTimeBooster: 5
+  countBooster: 5
+  lifeTimeBooster: 50
   minStep: 1
   maxStep: 8
 --- !u!1 &464039008
@@ -983,11 +983,9 @@ MonoBehaviour:
   jumped:
     m_PersistentCalls:
       m_Calls: []
-  boosted:
-    m_PersistentCalls:
-      m_Calls: []
   spriteRenderer: {fileID: 1568710050}
-  speed: 1
+  speed: 1.5
+  jumpPower: 400
   playerInput: {fileID: 1928115057}
 --- !u!50 &1568710048
 Rigidbody2D:
@@ -1002,14 +1000,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.1
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 6
 --- !u!58 &1568710049
 CircleCollider2D:
   m_ObjectHideFlags: 0

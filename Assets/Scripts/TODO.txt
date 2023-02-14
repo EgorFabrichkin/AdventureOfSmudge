@@ -3,7 +3,6 @@ GameCore
         
 +/-     Player
 +           Event Jumped
-+           Event Boosted
             Event Lose
         
 +           Rigidbody
@@ -31,7 +30,8 @@ GameCore
 +           ObjectPool
             
 +/-     Booster
-            Collider(isTrigger)
++           Event Collect
++           Collider(isTrigger)
 +           +RandomSpawn()
 +           ObjectPool
             Particle Effect on Destroy
