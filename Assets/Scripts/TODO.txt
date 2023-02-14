@@ -1,45 +1,44 @@
 GameCore
-    Level
-        List<Platform> actualPlatform
-        Awake
-            Spawn start platform and specified color
+    Level    
         
-        Player
-            Event Jumped
-            Event Boosted
++/-     Player
++           Event Jumped
++           Event Boosted
             Event Lose
         
-            Rigidbody
-            Collider
-            Input
-                IInput
-                KeyboardInput
-                SwipeInput
-            CollisionPlatform
++           Rigidbody
++           Collider
++           Input
++               IInput
++               KeyboardInput
++               SwipeInput
++/-         CollisionPlatform
                 Animation
                 ChangeColor
-                Crash(if colors matched)
++               Crash(if colors matched)
                     Particle Effect on Crash
-            JumpCount
+            
++           JumpCount
             ChangeSize
                 JumpCount--
+            
             DistanceCount
             
-        Platform
-            Collider
-            +RandomSpawn()
-            ChangeColor
-            ObjectPool
++       Platform
++           Collider
++           +RandomSpawn()
++           +GetColor
++           ObjectPool
             
-        Booster
++/-     Booster
             Collider(isTrigger)
-            +RandomSpawn()
-            ObjectPool
++           +RandomSpawn()
++           ObjectPool
             Particle Effect on Destroy
             
-        ChangeColor
-            Colors Palette
-            +ChangeColor()
++/-     ChangeColor
++           Colors Palette
++           +ChangeColor()
     
 UI
     Main Screen
