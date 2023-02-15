@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utils
+namespace GameCore.Utils
 {
     public class ObjectPool<T> where T : Behaviour
     {

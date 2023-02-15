@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameCore.Platforms
+namespace GameCore.SpawnsObjects.Platforms
 {
     [RequireComponent(typeof(Collider2D))]
     [RequireComponent(typeof(PlatformEffector2D))]

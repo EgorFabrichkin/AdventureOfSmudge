@@ -169,9 +169,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boosterPrefabs: {fileID: 2310197285806044706, guid: 49324c04b541de74daa803504b19ce6e, type: 3}
   countBooster: 5
-  lifeTimeBooster: 50
   minStep: 1
   maxStep: 8
+  lifeTimeBooster: 5
+  firstBoosterSpawn: 5
+  delay:
+    value: 3
 --- !u!1 &464039008
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,7 +842,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.94600004}
   m_AnchorMax: {x: 0.09200001, y: 1}
-  m_AnchoredPosition: {x: -0.2000122, y: 0.7999878}
+  m_AnchoredPosition: {x: -0.2000122, y: 0.8000488}
   m_SizeDelta: {x: 1, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367338276
@@ -1137,6 +1140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPrefabs: {fileID: 1948369319387701726, guid: b59bd8219c92f494792a18172ae7d5e8, type: 3}
   countPlatform: 50
+  countPlatformToStart: 20
+  maxCountPlatformPerLevel: 30
+  previousSpawnPoint: -10
   minX: 5
   maxX: 5
   nextSpawnPoint: 3

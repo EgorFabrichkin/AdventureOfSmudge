@@ -1,11 +1,10 @@
-using GameCore.Boosters;
 using GameCore.Player;
 using GameCore.Player.Jumps;
-using GameCore.Spawns.BoostersSpawns;
-using GameCore.Spawns.PlatformsSpawns;
+using GameCore.SpawnsObjects.Spawns.BoostersSpawns;
+using GameCore.SpawnsObjects.Spawns.PlatformsSpawns;
+using GameCore.Utils;
 using UI;
 using UnityEngine;
-using Utils;
 
 public class EntryPoint : MonoBehaviour
 {

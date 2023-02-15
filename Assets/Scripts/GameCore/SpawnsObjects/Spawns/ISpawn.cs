@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace GameCore.Spawns
+namespace GameCore.SpawnsObjects.Spawns
 {
     public interface ISpawn
     {

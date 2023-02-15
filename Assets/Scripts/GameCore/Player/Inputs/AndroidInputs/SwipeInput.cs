@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using GameCore.Utils;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Utils;
 
 namespace GameCore.Player.Inputs.AndroidInputs
 {

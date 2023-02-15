@@ -1,8 +1,8 @@
-﻿using GameCore.Platforms;
-using GameCore.Player.Inputs;
+﻿using GameCore.Player.Inputs;
+using GameCore.SpawnsObjects.Platforms;
+using GameCore.Utils;
 using UnityEngine;
 using UnityEngine.Events;
-using Utils;
 
 namespace GameCore.Player
 {

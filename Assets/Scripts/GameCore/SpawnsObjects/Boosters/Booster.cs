@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GameCore.Boosters
+namespace GameCore.SpawnsObjects.Boosters
 {
     [RequireComponent(typeof(Collider2D))]
     public class Booster : MonoBehaviour

@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using GameCore.Platforms;
+using System.Linq;
+using GameCore.SpawnsObjects.Platforms;
+using GameCore.Utils;
 using UnityEngine;
-using Utils;
 
-namespace GameCore.Spawns.PlatformsSpawns
+namespace GameCore.SpawnsObjects.Spawns.PlatformsSpawns
 {
     public class PlatformsSpawn : SimpleSpawn
     {
         [SerializeField] private Platform platformPrefabs = null!;
         [SerializeField] private int countPlatform;
+        [SerializeField] private int countPlatformToStart;
+        [SerializeField] private float maxCountPlatformPerLevel;
         [Header("Spawn Area")] 
+        [SerializeField] private float previousSpawnPoint;
         [SerializeField] private float minX;
         [SerializeField] private float maxX;
         [SerializeField] private float nextSpawnPoint;
@@ -20,7 +24,6 @@ namespace GameCore.Spawns.PlatformsSpawns
         private List<Platform> actualplatform = new();
 
         private Vector3 playerPosition;
-        private float previousSpawnPoint;
         
         private void Awake()
         {
@@ -28,6 +31,11 @@ namespace GameCore.Spawns.PlatformsSpawns
                 platformPrefabs.EnsureNotNull("platform not specified"),
                 countPlatform
             );
+
+            for (var i = 0; i < countPlatformToStart; i++)
+            {
+                StartCoroutine(Spawn());
+            }
         }
         
         private void Update()
@@ -43,7 +51,7 @@ namespace GameCore.Spawns.PlatformsSpawns
             var newPlatform = platformPool.TryGetObject();
             actualplatform.Add(newPlatform);
             
-            var distance = 1f;
+            var minDistanceBetweenPlatforms = 1f;
 
             newPlatform.transform.SetPositionAndRotation(
                 new Vector3(
@@ -51,7 +59,7 @@ namespace GameCore.Spawns.PlatformsSpawns
                         playerPosition.x - minX,
                         playerPosition.x + maxX),
                     Random.Range(
-                        previousSpawnPoint + distance, 
+                        previousSpawnPoint + minDistanceBetweenPlatforms, 
                         previousSpawnPoint + nextSpawnPoint), 
                     0),
                 Quaternion.identity
@@ -59,18 +67,14 @@ namespace GameCore.Spawns.PlatformsSpawns
             
             previousSpawnPoint = newPlatform.transform.position.y;
 
-            yield return new WaitForSeconds(50);
-            //yield return new WaitUntil(() => playerPosition.y >= previousSpawnPoint);
-
-            platformPool.ReturnToPool(newPlatform);
-            actualplatform.Remove(newPlatform);
+            yield return new WaitUntil(() => actualplatform.Count >= maxCountPlatformPerLevel);
+            
+            platformPool.ReturnToPool(actualplatform.ElementAt(0));
+            actualplatform.RemoveAt(0);
         }
 
         public void GetPlayerPosition(Vector3 position) => playerPosition = position;
 
-        public List<Platform> ActualPlatforms()
-        {
-            return actualplatform;
-        }
+        public List<Platform> ActualPlatforms() => actualplatform;
     }
 }

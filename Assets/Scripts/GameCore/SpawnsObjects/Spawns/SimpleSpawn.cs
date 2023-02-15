@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace GameCore.Spawns
+namespace GameCore.SpawnsObjects.Spawns
 {
     public abstract class SimpleSpawn : MonoBehaviour, ISpawn
     {
