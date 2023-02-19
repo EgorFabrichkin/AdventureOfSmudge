@@ -2,7 +2,7 @@
 
 namespace GameCore.Colors
 {
-    public class Palette : MonoBehaviour, IPalette
+    public class Palette : MonoBehaviour
     {
         [SerializeField] private Color[] palette =
         {
@@ -15,8 +15,8 @@ namespace GameCore.Colors
             Color.red,
             Color.yellow
         };
-
-        public Color GetRandomColor()
+        
+        public Color RandomColorFromPalette()
         {
             return palette[Random.Range(0, palette.Length)];
         }

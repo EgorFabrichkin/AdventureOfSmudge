@@ -1,7 +1,7 @@
-﻿using GameCore.Utils;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace UI
 {

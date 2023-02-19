@@ -4,20 +4,22 @@ namespace GameCore.Colors
 {
     public class ChangeColor
     {
-        private Palette palette = null!;
+        private readonly Palette palette;
+        private readonly Color previousColor;
 
-        public ChangeColor(SpriteRenderer spriteRenderer)
+        public ChangeColor(Palette palette, Color previousColor)
         {
-            spriteRenderer.color = GetColor(spriteRenderer.color);
+            this.palette = palette;
+            this.previousColor = previousColor;
         }
 
-        private Color GetColor(Color previousColor)
+        public Color GetRandomColor()
         {
-            var currentColor = palette.GetRandomColor();
+            var currentColor = palette.RandomColorFromPalette();
             
             while (previousColor == currentColor)
             {
-                currentColor = palette.GetRandomColor();
+                currentColor = palette.RandomColorFromPalette();
             }
 
             return currentColor;

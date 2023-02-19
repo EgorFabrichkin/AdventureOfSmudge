@@ -2,19 +2,11 @@ GameCore
     Level    
         
 +/-     Player
-+           Event Jumped
             Event Lose
         
-+           Rigidbody
-+           Collider
-+           Input
-+               IInput
-+               KeyboardInput
-+               SwipeInput
 +/-         CollisionPlatform
                 Animation
                 ChangeColor
-+               Crash(if colors matched)
                     Particle Effect on Crash
             
 +           JumpCount
@@ -23,21 +15,7 @@ GameCore
             
             DistanceCount
             
-+       Platform
-+           Collider
-+           +RandomSpawn()
-+           +GetColor
-+           ObjectPool
-            
-+/-     Booster
-+           Event Collect
-+           Collider(isTrigger)
-+           +RandomSpawn()
-+           ObjectPool
-            Particle Effect on Destroy
-            
 +/-     ChangeColor
-+           Colors Palette
 +           +ChangeColor()
     
 UI
