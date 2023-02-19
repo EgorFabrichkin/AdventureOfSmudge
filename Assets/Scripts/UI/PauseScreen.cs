@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using GamePlayFlow;
 using UnityEngine;
 using Utils;
@@ -9,28 +9,32 @@ namespace UI
     {
         [SerializeField] private Canvas canvas = null!;
 
-        private void Awake()
+        private List<IPause> array = null!;
+
+        private void Start()
         {
-            canvas.EnsureNotNull("canvas not specified").enabled = false;
+            canvas.EnsureNotNull("pause canvas not specified").enabled = false;
         }
 
         public void Paused()
         {
-            StartCoroutine(Pause());
+            PausedObject(true);
         }
 
-        private IEnumerator Pause()
+        public void Continue()
         {
-            canvas.enabled = true;
-
-            foreach (var item in GetComponents<IPause>())
-            {
-                item.Paused(true);
-            }
-
-            yield return new WaitForSeconds(10);
-            
-            canvas.enabled = false;
+            PausedObject(false);
         }
+        
+        private void PausedObject(bool value)
+        {
+            canvas.enabled = value;
+            foreach (var obj in array)
+            {
+                obj.Paused(value);
+            }
+        }
+        
+        public void PausedObjects(List<IPause> objectArray) => array = objectArray;
     }
 }

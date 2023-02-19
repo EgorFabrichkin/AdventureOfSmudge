@@ -1,6 +1,5 @@
 ﻿using GameCore.Colors;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore.Platforms
 {
@@ -8,8 +7,6 @@ namespace GameCore.Platforms
     [RequireComponent(typeof(PlatformEffector2D))]
     public class Platform : MonoBehaviour, IColor
     {
-        public UnityEvent spawned = new();
-        
         [SerializeField] private SpriteRenderer spriteRenderer = null!;
 
         private void Awake()

@@ -48,19 +48,13 @@ namespace GameCore.Players
             jumped.Invoke();
         }
 
-        public void SetColor(Color color)
-        {
-            spriteRenderer.color = color;
-        }
-        
+        public void SetColor(Color color) => spriteRenderer.color = color;
+
         public Color GetColor()
         {
             return spriteRenderer.color;
         }
 
-        public void Paused(bool value)
-        {
-            rigidbody2D.isKinematic = value;
-        }
+        public void Paused(bool value) => rigidbody2D.simulated = !value;
     }
 }

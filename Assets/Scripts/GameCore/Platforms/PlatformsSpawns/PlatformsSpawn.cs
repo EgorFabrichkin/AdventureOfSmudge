@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace GameCore.Platforms.PlatformsSpawns
 {
@@ -30,7 +31,7 @@ namespace GameCore.Platforms.PlatformsSpawns
                 platformPrefabs.EnsureNotNull("platform not specified"),
                 countPlatform
             );
-
+            
             for (var i = 0; i < countPlatformToStart; i++)
             {
                 StartCoroutine(Spawn());
@@ -48,7 +49,6 @@ namespace GameCore.Platforms.PlatformsSpawns
         private IEnumerator Spawn()
         {
             var newPlatform = platformPool.TryGetObject();
-            newPlatform.spawned.Invoke();
             actualplatform.Add(newPlatform);
             
             var minDistanceBetweenPlatforms = 1f;
