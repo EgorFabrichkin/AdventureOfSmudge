@@ -1,28 +1,48 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using GameCore.Platforms;
+using GameCore.Players;
+using UnityEngine;
+using Utils;
 
 namespace GameCore.Colors
 {
-    public class ChangeColor
+    public class ChangeColor : MonoBehaviour
     {
-        private readonly Palette palette;
-        private readonly Color previousColor;
+        [SerializeField] private Palette palette = null!;
 
-        public ChangeColor(Palette palette, Color previousColor)
+        private List<Platform> actualPlatforms = null!;
+        private Player origin = null!;
+
+        private void Awake()
         {
-            this.palette = palette;
-            this.previousColor = previousColor;
+            palette.EnsureNotNull("palette not found");
         }
-
-        public Color GetRandomColor()
+        
+        private void Start()
         {
-            var currentColor = palette.RandomColorFromPalette();
-            
-            while (previousColor == currentColor)
-            {
-                currentColor = palette.RandomColorFromPalette();
-            }
+            actualPlatforms.ForEach(
+                p => p.SetColor(
+                    new RandomColor(
+                            palette,
+                            p.GetColor()
+                        )
+                        .GetRandomColor()
+                )
+            );
 
-            return currentColor;
+            origin.jumped.AddListener(() =>
+                origin.SetColor(
+                    new RandomColor(
+                            palette, 
+                            origin.GetColor()
+                        )
+                        .GetRandomColor()
+                )
+            );
         }
+        
+        public void ActualPlatforms(List<Platform> platforms) => actualPlatforms = platforms;
+
+        public void GetPlayer(Player player) => origin = player;
     }
 }

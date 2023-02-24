@@ -7,6 +7,7 @@ namespace GameCore.Boosters
     [RequireComponent(typeof(Collider2D))]
     public class Booster : MonoBehaviour
     {
+        public UnityEvent collected = new();
         public UnityEvent destroyed = new();
         
         private void Awake()
@@ -19,7 +20,7 @@ namespace GameCore.Boosters
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            destroyed.Invoke();
+            collected.Invoke();
         }
     }
 }

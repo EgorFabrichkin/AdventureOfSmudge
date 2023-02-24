@@ -3,7 +3,7 @@
 namespace GameCore.Boosters
 {
     [RequireComponent(typeof(Booster))]
-    public class DestroyBooster : MonoBehaviour
+    public class DestroyedBooster : MonoBehaviour
     {
         [SerializeField] private float delay;
 

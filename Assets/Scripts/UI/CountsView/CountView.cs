@@ -3,18 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
-namespace UI
+namespace UI.CountsView
 {
-    public class JumpCountView : MonoBehaviour
+    public class CountView : MonoBehaviour
     {
         [SerializeField] private Text text = null!;
 
         private void Awake()
         {
-            text.EnsureNotNull("Text not specified");
+            text.EnsureNotNull("Text distance count not specified");
         }
 
-        public void CountView(IReadOnlyReactiveProperty<int> jumpCount) => jumpCount.Subscribe(Render);
+        public void ValueView(IReadOnlyReactiveProperty<int> value) => value.Subscribe(Render);
+
         private void Render(int value) => text.text = $"{value}";
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using GameCore.Platforms;
-using GamePlayFlow;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
 
 namespace GameCore.Boosters.BoostersSpawns
 {
-    public class BoostersSpawn : MonoBehaviour, IPause
+    public class BoostersSpawn : MonoBehaviour
     {
         [SerializeField] private Booster boosterPrefabs = null!;
         [SerializeField] private int minStep;
@@ -17,13 +16,12 @@ namespace GameCore.Boosters.BoostersSpawns
         [SerializeField] private float lifeTimeBooster;
         [SerializeField] private float firstBoosterSpawn;
         [SerializeField] private Delay delay = null!;
-        [Header("Debug")] [SerializeField] private bool pause = false;
         
         private IReadOnlyList<Platform> actualPlatforms = null!;
 
         private void Update()
         {
-            if (Time.time >= firstBoosterSpawn && delay.TryReset() && pause == false)
+            if (Time.time >= firstBoosterSpawn && delay.TryReset())
             {
                 StartCoroutine(Spawn());
             }
@@ -48,9 +46,7 @@ namespace GameCore.Boosters.BoostersSpawns
             
             newBooster.destroyed.Invoke();
         }
-
-        public void PoolPlatforms(IReadOnlyList<Platform> platforms) => actualPlatforms = platforms;
         
-        public void Paused(bool value) => pause = value;
+        public void PoolPlatforms(IReadOnlyList<Platform> platforms) => actualPlatforms = platforms;
     }
 }

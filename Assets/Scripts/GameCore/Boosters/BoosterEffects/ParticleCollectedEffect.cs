@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using Utils;
 
-namespace GameCore.Boosters
+namespace GameCore.Boosters.BoosterEffects
 {
     [RequireComponent(typeof(Booster))]
-    public class ParticleBooster : MonoBehaviour
+    public class ParticleCollectedEffect : MonoBehaviour
     {
         [SerializeField] private new ParticleSystem particleSystem = null!;
         
@@ -12,7 +12,7 @@ namespace GameCore.Boosters
         {
             particleSystem.EnsureNotNull("Particle System not specified");
 
-            GetComponent<Booster>()!.destroyed.AddListener(() =>
+            GetComponent<Booster>()!.collected.AddListener(() =>
             {
                 particleSystem.transform.SetParent(null!);
                 particleSystem.Play();
